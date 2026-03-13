@@ -1,0 +1,134 @@
+{
+  "/Assignment3-PlottingApi/PlotApiUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PlotApiUrl"
+    }
+  ],
+  "/Assignment3-PlottingApi/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    }
+  ],
+  "/Assignment3-PlottingApi/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    }
+  ],
+  "/Assignment3-PlottingApi/PlottingLambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PlottingLambdaE0AD2309"
+    }
+  ],
+  "/Assignment3-PlottingApi/RestApi/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApi0C43BF4B"
+    }
+  ],
+  "/Assignment3-PlottingApi/RestApi/Account": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiAccount7C83CF5A"
+    }
+  ],
+  "/Assignment3-PlottingApi/RestApi/Endpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiEndpoint0551178A"
+    }
+  ],
+  "/Assignment3-PlottingApi/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    }
+  ],
+  "/Assignment3-PlottingApi/CDKMetadata/Condition": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadataAvailable"
+    }
+  ],
+  "/Assignment3-PlottingApi/Exports/Output{\"Ref\":\"RestApi0C43BF4B\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefRestApi0C43BF4B00053745"
+    }
+  ],
+  "/Assignment3-PlottingApi/Exports/Output{\"Ref\":\"RestApiDeploymentStageprod3855DE66\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefRestApiDeploymentStageprod3855DE66D0316BB8"
+    }
+  ],
+  "/Assignment3-PlottingApi/PlottingLambda/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PlottingLambdaServiceRole3977BEC1"
+    }
+  ],
+  "/Assignment3-PlottingApi/RestApi/CloudWatchRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiCloudWatchRoleE3ED6605"
+    }
+  ],
+  "/Assignment3-PlottingApi/RestApi/Deployment/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiDeployment180EC503b523f84eefb7bc8aa71abc8b3e33586d"
+    }
+  ],
+  "/Assignment3-PlottingApi/RestApi/DeploymentStage.prod/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiDeploymentStageprod3855DE66"
+    }
+  ],
+  "/Assignment3-PlottingApi/PlottingLambda/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PlottingLambdaServiceRoleDefaultPolicy54495C4E"
+    }
+  ],
+  "/Assignment3-PlottingApi/RestApi/Default/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiOPTIONS6AA64D2D"
+    }
+  ],
+  "/Assignment3-PlottingApi/RestApi/Default/plot/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiplot658C3D03"
+    }
+  ],
+  "/Assignment3-PlottingApi/RestApi/Default/plot/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiplotOPTIONSD1669A40"
+    }
+  ],
+  "/Assignment3-PlottingApi/RestApi/Default/plot/GET/ApiPermission.Assignment3PlottingApiRestApi2B643B5B.GET..plot": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiplotGETApiPermissionAssignment3PlottingApiRestApi2B643B5BGETplot60BDECCF"
+    }
+  ],
+  "/Assignment3-PlottingApi/RestApi/Default/plot/GET/ApiPermission.Test.Assignment3PlottingApiRestApi2B643B5B.GET..plot": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiplotGETApiPermissionTestAssignment3PlottingApiRestApi2B643B5BGETplotA639BDD1"
+    }
+  ],
+  "/Assignment3-PlottingApi/RestApi/Default/plot/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "RestApiplotGETCF5ECD92"
+    }
+  ]
+}

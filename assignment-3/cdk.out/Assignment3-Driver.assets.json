@@ -1,0 +1,34 @@
+{
+  "version": "52.0.0",
+  "files": {
+    "c35cdfbca80c1b39ad62f4f52af7dd20848f9b9f750485e5945d86038c3f043d": {
+      "displayName": "DriverLambda/Code",
+      "source": {
+        "path": "asset.c35cdfbca80c1b39ad62f4f52af7dd20848f9b9f750485e5945d86038c3f043d",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region-ed1daa9f": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "c35cdfbca80c1b39ad62f4f52af7dd20848f9b9f750485e5945d86038c3f043d.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "cecc8700b04abfa0a98e8868ebd831d574ecfd772cb788f8b6a9f6a5341d28cb": {
+      "displayName": "Assignment3-Driver Template",
+      "source": {
+        "path": "Assignment3-Driver.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region-84f8283d": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "cecc8700b04abfa0a98e8868ebd831d574ecfd772cb788f8b6a9f6a5341d28cb.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

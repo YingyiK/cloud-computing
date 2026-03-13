@@ -1,0 +1,50 @@
+{
+  "/Assignment3-Data/TableName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TableName"
+    }
+  ],
+  "/Assignment3-Data/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    }
+  ],
+  "/Assignment3-Data/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    }
+  ],
+  "/Assignment3-Data/S3ObjectSizeHistoryTable/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "S3ObjectSizeHistoryTableC90465AF"
+    }
+  ],
+  "/Assignment3-Data/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    }
+  ],
+  "/Assignment3-Data/CDKMetadata/Condition": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadataAvailable"
+    }
+  ],
+  "/Assignment3-Data/Exports/Output{\"Fn::GetAtt\":[\"S3ObjectSizeHistoryTableC90465AF\",\"Arn\"]}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputFnGetAttS3ObjectSizeHistoryTableC90465AFArn40C80232"
+    }
+  ],
+  "/Assignment3-Data/Exports/Output{\"Ref\":\"S3ObjectSizeHistoryTableC90465AF\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefS3ObjectSizeHistoryTableC90465AF48D21EEE"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "/Assignment3-Driver/DriverLambdaName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DriverLambdaName"
+    }
+  ],
+  "/Assignment3-Driver/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    }
+  ],
+  "/Assignment3-Driver/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    }
+  ],
+  "/Assignment3-Driver/DriverLambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DriverLambda11B3F668"
+    }
+  ],
+  "/Assignment3-Driver/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    }
+  ],
+  "/Assignment3-Driver/CDKMetadata/Condition": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadataAvailable"
+    }
+  ],
+  "/Assignment3-Driver/DriverLambda/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DriverLambdaServiceRoleB0E11A6F"
+    }
+  ],
+  "/Assignment3-Driver/DriverLambda/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DriverLambdaServiceRoleDefaultPolicy2F9D5782"
+    }
+  ]
+}

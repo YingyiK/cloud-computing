@@ -1,0 +1,886 @@
+{
+ "Resources": {
+  "PlottingLambdaServiceRole3977BEC1": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/PlottingLambda/ServiceRole/Resource"
+   }
+  },
+  "PlottingLambdaServiceRoleDefaultPolicy54495C4E": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "Assignment3-Data:ExportsOutputFnGetAttS3ObjectSizeHistoryTableC90465AFArn40C80232"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "Assignment3-Data:ExportsOutputFnGetAttS3ObjectSizeHistoryTableC90465AFArn40C80232"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::ImportValue": "Assignment3-Data:ExportsOutputFnGetAttS3ObjectSizeHistoryTableC90465AFArn40C80232"
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::ImportValue": "Assignment3-Data:ExportsOutputFnGetAttS3ObjectSizeHistoryTableC90465AFArn40C80232"
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging",
+        "s3:Abort*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::ImportValue": "Assignment3-BucketTracking:ExportsOutputFnGetAttTestBucket560B80BCArnA29F078C"
+          },
+          "/*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "PlottingLambdaServiceRoleDefaultPolicy54495C4E",
+    "Roles": [
+     {
+      "Ref": "PlottingLambdaServiceRole3977BEC1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/PlottingLambda/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "PlottingLambdaE0AD2309": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "c35cdfbca80c1b39ad62f4f52af7dd20848f9b9f750485e5945d86038c3f043d.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "BUCKET_NAME": {
+       "Fn::ImportValue": "Assignment3-BucketTracking:ExportsOutputRefTestBucket560B80BC3F12F1DE"
+      },
+      "TABLE_NAME": {
+       "Fn::ImportValue": "Assignment3-Data:ExportsOutputRefS3ObjectSizeHistoryTableC90465AF48D21EEE"
+      },
+      "PLOT_KEY": "plot"
+     }
+    },
+    "Handler": "plotting_lambda.lambda_handler",
+    "MemorySize": 512,
+    "Role": {
+     "Fn::GetAtt": [
+      "PlottingLambdaServiceRole3977BEC1",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.11",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "PlottingLambdaServiceRoleDefaultPolicy54495C4E",
+    "PlottingLambdaServiceRole3977BEC1"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/PlottingLambda/Resource",
+    "aws:asset:path": "asset.c35cdfbca80c1b39ad62f4f52af7dd20848f9b9f750485e5945d86038c3f043d",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "RestApi0C43BF4B": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Name": "RestApi"
+   },
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/RestApi/Resource"
+   }
+  },
+  "RestApiCloudWatchRoleE3ED6605": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+       ]
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/RestApi/CloudWatchRole/Resource"
+   }
+  },
+  "RestApiAccount7C83CF5A": {
+   "Type": "AWS::ApiGateway::Account",
+   "Properties": {
+    "CloudWatchRoleArn": {
+     "Fn::GetAtt": [
+      "RestApiCloudWatchRoleE3ED6605",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "RestApi0C43BF4B"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/RestApi/Account"
+   }
+  },
+  "RestApiDeployment180EC503b523f84eefb7bc8aa71abc8b3e33586d": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "DependsOn": [
+    "RestApiOPTIONS6AA64D2D",
+    "RestApiplotGETCF5ECD92",
+    "RestApiplotOPTIONSD1669A40",
+    "RestApiplot658C3D03"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/RestApi/Deployment/Resource",
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "RestApiDeploymentStageprod3855DE66": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "RestApiDeployment180EC503b523f84eefb7bc8aa71abc8b3e33586d"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    },
+    "StageName": "prod"
+   },
+   "DependsOn": [
+    "RestApiAccount7C83CF5A"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/RestApi/DeploymentStage.prod/Resource"
+   }
+  },
+  "RestApiOPTIONS6AA64D2D": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Fn::GetAtt": [
+      "RestApi0C43BF4B",
+      "RootResourceId"
+     ]
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/RestApi/Default/OPTIONS/Resource"
+   }
+  },
+  "RestApiplot658C3D03": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "RestApi0C43BF4B",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "plot",
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/RestApi/Default/plot/Resource"
+   }
+  },
+  "RestApiplotOPTIONSD1669A40": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,OPTIONS'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "RestApiplot658C3D03"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/RestApi/Default/plot/OPTIONS/Resource"
+   }
+  },
+  "RestApiplotGETApiPermissionAssignment3PlottingApiRestApi2B643B5BGETplot60BDECCF": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "PlottingLambdaE0AD2309",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/",
+       {
+        "Ref": "RestApiDeploymentStageprod3855DE66"
+       },
+       "/GET/plot"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/RestApi/Default/plot/GET/ApiPermission.Assignment3PlottingApiRestApi2B643B5B.GET..plot"
+   }
+  },
+  "RestApiplotGETApiPermissionTestAssignment3PlottingApiRestApi2B643B5BGETplotA639BDD1": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "PlottingLambdaE0AD2309",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "RestApi0C43BF4B"
+       },
+       "/test-invoke-stage/GET/plot"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/RestApi/Default/plot/GET/ApiPermission.Test.Assignment3PlottingApiRestApi2B643B5B.GET..plot"
+   }
+  },
+  "RestApiplotGETCF5ECD92": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:",
+        {
+         "Ref": "AWS::Region"
+        },
+        ":lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "PlottingLambdaE0AD2309",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "RestApiplot658C3D03"
+    },
+    "RestApiId": {
+     "Ref": "RestApi0C43BF4B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/RestApi/Default/plot/GET/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02OXU7DMBCEz9J3Z4GaC6Qg3hBROUDlOktY4p8oXquKotydtVtEn/abHe949rB/1vC4M5fU2H5sHJ1h/WRjRyWr0+qMP/cG1rccLFMM6uUr3HOHs6eURG2KjIf1GB0Wo84uOrJLfVdpU0mfTErICdoyRMMh2xH5YBIqM9FgGC9mkSBM3E5Us/6xtTbmwOoVJxcXj4KyvVPSfagFriCnMc8Wa/w78nfsi3mjP/f2SeVtU7VauacwFOsj85R5U90iV+FBw5MGvftJRM0sZcgjHK/zF+FJao1PAQAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "Assignment3-PlottingApi/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "RestApiEndpoint0551178A": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "RestApi0C43BF4B"
+      },
+      ".execute-api.",
+      {
+       "Ref": "AWS::Region"
+      },
+      ".",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "RestApiDeploymentStageprod3855DE66"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "PlotApiUrl": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "RestApi0C43BF4B"
+      },
+      ".execute-api.",
+      {
+       "Ref": "AWS::Region"
+      },
+      ".",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "RestApiDeploymentStageprod3855DE66"
+      },
+      "/plot"
+     ]
+    ]
+   }
+  },
+  "ExportsOutputRefRestApi0C43BF4B00053745": {
+   "Value": {
+    "Ref": "RestApi0C43BF4B"
+   },
+   "Export": {
+    "Name": "Assignment3-PlottingApi:ExportsOutputRefRestApi0C43BF4B00053745"
+   }
+  },
+  "ExportsOutputRefRestApiDeploymentStageprod3855DE66D0316BB8": {
+   "Value": {
+    "Ref": "RestApiDeploymentStageprod3855DE66"
+   },
+   "Export": {
+    "Name": "Assignment3-PlottingApi:ExportsOutputRefRestApiDeploymentStageprod3855DE66D0316BB8"
+   }
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-3"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-4"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "us-west-2"
+     ]
+    }
+   ]
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

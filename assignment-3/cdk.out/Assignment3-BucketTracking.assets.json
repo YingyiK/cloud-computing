@@ -1,0 +1,48 @@
+{
+  "version": "52.0.0",
+  "files": {
+    "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6": {
+      "displayName": "Assignment3-BucketTracking/Custom::S3AutoDeleteObjectsCustomResourceProvider Code",
+      "source": {
+        "path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region-e31788a2": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "c35cdfbca80c1b39ad62f4f52af7dd20848f9b9f750485e5945d86038c3f043d": {
+      "displayName": "SizeTrackingLambda/Code",
+      "source": {
+        "path": "asset.c35cdfbca80c1b39ad62f4f52af7dd20848f9b9f750485e5945d86038c3f043d",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "current_account-current_region-ed1daa9f": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "c35cdfbca80c1b39ad62f4f52af7dd20848f9b9f750485e5945d86038c3f043d.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "a878e33f35f22ac092fd18da21d419dbab1c742f57fae2676ef63956551edbcd": {
+      "displayName": "Assignment3-BucketTracking Template",
+      "source": {
+        "path": "Assignment3-BucketTracking.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region-83c17764": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "a878e33f35f22ac092fd18da21d419dbab1c742f57fae2676ef63956551edbcd.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

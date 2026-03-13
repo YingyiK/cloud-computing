@@ -1,0 +1,20 @@
+{
+  "version": "52.0.0",
+  "files": {
+    "b5389efced44515526b63287930def2d08a40bc27659b9aa8d1b48477bb62a89": {
+      "displayName": "Assignment3-Data Template",
+      "source": {
+        "path": "Assignment3-Data.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region-5350298c": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "b5389efced44515526b63287930def2d08a40bc27659b9aa8d1b48477bb62a89.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

@@ -1,0 +1,140 @@
+{
+  "/Assignment3-BucketTracking/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+      "data": true
+    }
+  ],
+  "/Assignment3-BucketTracking/BucketName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BucketName"
+    }
+  ],
+  "/Assignment3-BucketTracking/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    }
+  ],
+  "/Assignment3-BucketTracking/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    }
+  ],
+  "/Assignment3-BucketTracking/TestBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TestBucket560B80BC"
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketAutoDeleteObjects"
+      }
+    }
+  ],
+  "/Assignment3-BucketTracking/TestBucket/AllowBucketNotificationsToAssignment3BucketTrackingSizeTrackingLambda655C411D": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TestBucketAllowBucketNotificationsToAssignment3BucketTrackingSizeTrackingLambda655C411DDF484B63"
+    }
+  ],
+  "/Assignment3-BucketTracking/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+    }
+  ],
+  "/Assignment3-BucketTracking/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+    }
+  ],
+  "/Assignment3-BucketTracking/SizeTrackingLambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SizeTrackingLambda9C763A26"
+    }
+  ],
+  "/Assignment3-BucketTracking/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BucketNotificationsHandler050a0587b7544547bf325f094a3db8347ECC3691"
+    }
+  ],
+  "/Assignment3-BucketTracking/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    }
+  ],
+  "/Assignment3-BucketTracking/CDKMetadata/Condition": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadataAvailable"
+    }
+  ],
+  "/Assignment3-BucketTracking/Exports/Output{\"Fn::GetAtt\":[\"TestBucket560B80BC\",\"Arn\"]}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputFnGetAttTestBucket560B80BCArnA29F078C"
+    }
+  ],
+  "/Assignment3-BucketTracking/Exports/Output{\"Ref\":\"TestBucket560B80BC\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefTestBucket560B80BC3F12F1DE"
+    }
+  ],
+  "/Assignment3-BucketTracking/TestBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TestBucketPolicyBA12ED38"
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketPolicyStatements"
+      }
+    }
+  ],
+  "/Assignment3-BucketTracking/TestBucket/AutoDeleteObjectsCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TestBucketAutoDeleteObjectsCustomResource8FEAABD5"
+    }
+  ],
+  "/Assignment3-BucketTracking/TestBucket/Notifications/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TestBucketNotificationsE54C04C2"
+    }
+  ],
+  "/Assignment3-BucketTracking/SizeTrackingLambda/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SizeTrackingLambdaServiceRoleEE707D62"
+    }
+  ],
+  "/Assignment3-BucketTracking/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC"
+    }
+  ],
+  "/Assignment3-BucketTracking/SizeTrackingLambda/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SizeTrackingLambdaServiceRoleDefaultPolicy725C3475"
+    }
+  ],
+  "/Assignment3-BucketTracking/BucketNotificationsHandler050a0587b7544547bf325f094a3db834/Role/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleDefaultPolicy2CF63D36"
+    }
+  ]
+}
